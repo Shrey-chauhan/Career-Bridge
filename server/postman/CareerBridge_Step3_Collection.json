@@ -1,0 +1,135 @@
+{
+  "info": {
+    "name": "CareerBridge API - Profiles",
+    "description": "Postman Collection for Step 3: Student & Company Profile Management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Student Profile",
+      "item": [
+        {
+          "name": "Create Student Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"9876543210\",\n  \"college\": \"National Institute of Technology\",\n  \"degree\": \"B.Tech\",\n  \"branch\": \"CSE\",\n  \"graduationYear\": 2026,\n  \"cgpa\": 8.75,\n  \"backlogs\": 0,\n  \"skills\": [\"JavaScript\", \"React\", \"Node.js\", \"MongoDB\"],\n  \"bio\": \"Passionate full-stack developer\",\n  \"location\": \"Bangalore\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/students/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "students", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Get Student Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/students/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "students", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Update Student Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cgpa\": 9.1,\n  \"skills\": [\"JavaScript\", \"React\", \"Node.js\", \"MongoDB\", \"TypeScript\", \"Express\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/students/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "students", "profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Company Profile",
+      "item": [
+        {
+          "name": "Create Company Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyName\": \"Acme Software Solutions\",\n  \"industry\": \"Software\",\n  \"website\": \"https://acme.example.com\",\n  \"location\": \"Bangalore, India\",\n  \"companySize\": \"51-200\",\n  \"foundedYear\": 2018,\n  \"description\": \"Leading enterprise cloud platform builder.\",\n  \"contactEmail\": \"careers@acme.example.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/companies/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "companies", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Get Company Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/companies/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "companies", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Update Company Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companySize\": \"201-500\",\n  \"description\": \"Expanded global software provider.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/companies/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "companies", "profile"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

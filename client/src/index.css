@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #0f172a;
+  color: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Modern Interactive Card Hover Effects & Micro-Animations
+   ========================================================================== */
+
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s ease,
+              background-color 0.25s ease !important;
+  cursor: pointer;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  border-color: #38bdf8 !important;
+  box-shadow: 0 12px 28px -6px rgba(56, 189, 248, 0.25), 0 6px 16px -4px rgba(0, 0, 0, 0.5) !important;
+  background-color: #1e293b !important;
+}
+
+.card-hover:hover .icon-bounce {
+  transform: scale(1.15) rotate(4deg);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Navigation Card Specific Interactive Hover */
+.nav-card-interactive {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-card-interactive::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #38bdf8;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.nav-card-interactive:hover {
+  transform: translateY(-4px);
+  border-color: #38bdf8 !important;
+  box-shadow: 0 10px 24px -4px rgba(56, 189, 248, 0.25) !important;
+  background-color: #1e293b !important;
+}
+
+.nav-card-interactive:hover::before {
+  opacity: 1;
+}
+
+/* Button & Link Hover Animations */
+.btn-interactive {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+}
+
+.btn-interactive:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35) !important;
+}
+
+.btn-interactive:active {
+  transform: translateY(0);
+}
+
+/* Table Row Smooth Hover */
+tr.table-row-hover {
+  transition: background-color 0.2s ease;
+}
+
+tr.table-row-hover:hover {
+  background-color: rgba(51, 65, 85, 0.5) !important;
+}
+
+/* Glassmorphism Utility */
+.glass-card {
+  background: rgba(30, 41, 59, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}

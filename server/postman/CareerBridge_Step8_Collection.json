@@ -1,0 +1,189 @@
+{
+  "info": {
+    "name": "CareerBridge API - Interview Management System",
+    "description": "Postman Collection for Step 8: Interview scheduling, rescheduling, candidate confirmation, completion, and evaluation result recording.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Company Interview Actions",
+      "item": [
+        {
+          "name": "Schedule Candidate Interview",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": \"{{APPLICATION_ID}}\",\n  \"roundName\": \"Round 1 - Technical Interview\",\n  \"scheduledAt\": \"2026-09-10T10:00:00.000Z\",\n  \"duration\": 45,\n  \"interviewType\": \"ONLINE\",\n  \"meetingLink\": \"https://meet.google.com/xyz-abc-def\",\n  \"interviewerName\": \"Sarah Jenkins\",\n  \"interviewerEmail\": \"sarah@company.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/interviews",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews"]
+            }
+          }
+        },
+        {
+          "name": "Get Company Interview Pipeline",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/interviews?timeframe=UPCOMING",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews"],
+              "query": [
+                { "key": "timeframe", "value": "UPCOMING" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reschedule Interview",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scheduledAt\": \"2026-09-11T14:00:00.000Z\",\n  \"duration\": 60,\n  \"meetingLink\": \"https://meet.google.com/new-link\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/interviews/{{INTERVIEW_ID}}/reschedule",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews", "{{INTERVIEW_ID}}", "reschedule"]
+            }
+          }
+        },
+        {
+          "name": "Mark Interview as Completed",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/interviews/{{INTERVIEW_ID}}/complete",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews", "{{INTERVIEW_ID}}", "complete"]
+            }
+          }
+        },
+        {
+          "name": "Record Evaluation Result",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"result\": \"PASSED\",\n  \"feedback\": \"Strong technical foundation and excellent communication.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/interviews/{{INTERVIEW_ID}}/result",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews", "{{INTERVIEW_ID}}", "result"]
+            }
+          }
+        },
+        {
+          "name": "Mark Candidate No-Show",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/interviews/{{INTERVIEW_ID}}/no-show",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews", "{{INTERVIEW_ID}}", "no-show"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Student Interview Actions",
+      "item": [
+        {
+          "name": "Get Student Upcoming Interviews",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/interviews?timeframe=UPCOMING",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews"],
+              "query": [
+                { "key": "timeframe", "value": "UPCOMING" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Confirm Interview Attendance",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/interviews/{{INTERVIEW_ID}}/confirm",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews", "{{INTERVIEW_ID}}", "confirm"]
+            }
+          }
+        },
+        {
+          "name": "Cancel Interview",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cancellationReason\": \"Scheduling conflict due to university final exams.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/interviews/{{INTERVIEW_ID}}/cancel",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "interviews", "{{INTERVIEW_ID}}", "cancel"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

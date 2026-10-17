@@ -1,0 +1,177 @@
+{
+  "info": {
+    "name": "CareerBridge API - Admin & TPO Placement Management System",
+    "description": "Postman Collection for Step 9: Placement dashboard metrics, student directory, company verification, job/application/interview monitoring, placement drives, and security audit logs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Dashboard & Metrics",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/dashboard",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "dashboard"]
+        }
+      }
+    },
+    {
+      "name": "Student Management",
+      "item": [
+        {
+          "name": "Get Student Directory",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/students?page=1&limit=15",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "students"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "15" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Student Account Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isActive\": false\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/students/{{STUDENT_ID}}/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "students", "{{STUDENT_ID}}", "status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Company Verification Workflow",
+      "item": [
+        {
+          "name": "Get Company Directory",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/companies?verificationStatus=PENDING",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "companies"],
+              "query": [
+                { "key": "verificationStatus", "value": "PENDING" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve / Verify Company Credentials",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"VERIFIED\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/companies/{{COMPANY_ID}}/verify",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "companies", "{{COMPANY_ID}}", "verify"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Placement Drives",
+      "item": [
+        {
+          "name": "Create Campus Placement Drive",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TCS Annual Campus Drive 2026\",\n  \"companyId\": \"{{COMPANY_ID}}\",\n  \"startDate\": \"2026-09-15T09:00:00.000Z\",\n  \"endDate\": \"2026-09-18T18:00:00.000Z\",\n  \"location\": \"Main Campus Auditorium\",\n  \"eligibleCourses\": [\"B.Tech\", \"MCA\"],\n  \"eligibleGraduationYears\": [2026]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/drives",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "drives"]
+            }
+          }
+        },
+        {
+          "name": "Get Placement Drives List",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/drives",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "drives"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit Trail Logs",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/audit-logs?limit=50",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "audit-logs"],
+          "query": [
+            { "key": "limit", "value": "50" }
+          ]
+        }
+      }
+    }
+  ]
+}

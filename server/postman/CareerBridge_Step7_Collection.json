@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "CareerBridge API - Notification & Activity Management System",
+    "description": "Postman Collection for Step 7: In-app notifications, unread counts, status filters, read/delete actions, and application activity timeline.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Notification Management",
+      "item": [
+        {
+          "name": "Get User Notifications (Paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{USER_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notifications?page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notifications"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filter Unread Notifications Only",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{USER_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notifications?isRead=false",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notifications"],
+              "query": [
+                { "key": "isRead", "value": "false" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Unread Count",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{USER_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notifications/unread-count",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notifications", "unread-count"]
+            }
+          }
+        },
+        {
+          "name": "Mark Single Notification as Read",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{USER_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notifications/{{NOTIFICATION_ID}}/read",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notifications", "{{NOTIFICATION_ID}}", "read"]
+            }
+          }
+        },
+        {
+          "name": "Mark All Notifications as Read",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{USER_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notifications/read-all",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notifications", "read-all"]
+            }
+          }
+        },
+        {
+          "name": "Delete Notification",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{USER_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/notifications/{{NOTIFICATION_ID}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notifications", "{{NOTIFICATION_ID}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Application Activity Timeline",
+      "item": [
+        {
+          "name": "Get Application Activity Timeline",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{USER_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/applications/{{APPLICATION_ID}}/activity",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "{{APPLICATION_ID}}", "activity"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

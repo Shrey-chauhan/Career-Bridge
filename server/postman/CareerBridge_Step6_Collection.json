@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "CareerBridge API - Resume Management & Secure Documents",
+    "description": "Postman Collection for Step 6: Resume Upload, Versioning, Secure Retrieval, Active Resume Status, and Ownership Protections",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Student Resume Management",
+      "item": [
+        {
+          "name": "Upload Resume Document (PDF / DOCX)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "resume",
+                  "type": "file",
+                  "src": "resume.pdf"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/resumes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "resumes"]
+            }
+          }
+        },
+        {
+          "name": "Get My Active Resume",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/resumes/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "resumes", "me"]
+            }
+          }
+        },
+        {
+          "name": "Get Resume By ID (Authorized Access)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/resumes/{{RESUME_ID}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "resumes", "{{RESUME_ID}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Resume Document",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/resumes/{{RESUME_ID}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "resumes", "{{RESUME_ID}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Company Secure Resume Access",
+      "item": [
+        {
+          "name": "Company Access Applicant Resume",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/resumes/{{RESUME_ID}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "resumes", "{{RESUME_ID}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

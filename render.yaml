@@ -1,0 +1,54 @@
+# Render Infrastructure-as-Code Blueprint for CareerBridge MERN Stack Platform
+# Official Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  # -------------------------------------------------------------
+  # 1. Express Backend Web Service
+  # -------------------------------------------------------------
+  - type: web
+    name: careerbridge-backend
+    env: node
+    region: singapore # Options: oregon, frankfurt, singapore, ohio
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false # Prompts user for MongoDB connection string in Render Dashboard
+      - key: JWT_SECRET
+        generateValue: true # Generates secure 32-byte secret key automatically
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_URL
+        sync: false # Set to frontend static site URL (e.g. https://careerbridge-frontend.onrender.com)
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+  # -------------------------------------------------------------
+  # 2. React Vite Frontend Static Site
+  # -------------------------------------------------------------
+  - type: web
+    name: careerbridge-frontend
+    env: static
+    region: singapore
+    plan: free
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        sync: false # Set to backend API URL (e.g. https://careerbridge-backend.onrender.com/api)

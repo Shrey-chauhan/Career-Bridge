@@ -1,0 +1,142 @@
+{
+  "info": {
+    "name": "CareerBridge API - Jobs & Eligibility",
+    "description": "Postman Collection for Step 4: Job Management, Discovery, and Eligibility Engine",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Company Jobs",
+      "item": [
+        {
+          "name": "Create Job (Draft)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Full Stack Software Engineer\",\n  \"description\": \"Building scalable cloud placement platforms.\",\n  \"jobType\": \"FULL_TIME\",\n  \"workMode\": \"HYBRID\",\n  \"location\": \"Bangalore, India\",\n  \"salary\": { \"min\": 800000, \"max\": 1400000, \"currency\": \"INR\", \"period\": \"YEARLY\" },\n  \"experienceRequired\": { \"minYears\": 0, \"maxYears\": 2 },\n  \"skills\": [\"JavaScript\", \"React\", \"Node.js\", \"MongoDB\"],\n  \"eligibility\": {\n    \"minimumCgpa\": 7.5,\n    \"maximumBacklogs\": 0,\n    \"allowedBranches\": [\"CSE\", \"IT\", \"ECE\"],\n    \"graduationYears\": [2026, 2027],\n    \"requiredSkills\": [\"JavaScript\", \"React\"]\n  },\n  \"applicationDeadline\": \"2026-12-31T23:59:59.000Z\",\n  \"openings\": 5,\n  \"status\": \"DRAFT\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/jobs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "jobs"]
+            }
+          }
+        },
+        {
+          "name": "Get Company Jobs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/jobs/company",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "jobs", "company"]
+            }
+          }
+        },
+        {
+          "name": "Publish Job",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/jobs/company/{{JOB_ID}}/publish",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "jobs", "company", "{{JOB_ID}}", "publish"]
+            }
+          }
+        },
+        {
+          "name": "Close Job",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/jobs/company/{{JOB_ID}}/close",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "jobs", "company", "{{JOB_ID}}", "close"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Student Job Discovery & Eligibility",
+      "item": [
+        {
+          "name": "Browse Published Jobs (Search & Filter)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/jobs?search=React&jobType=FULL_TIME&page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "jobs"],
+              "query": [
+                { "key": "search", "value": "React" },
+                { "key": "jobType", "value": "FULL_TIME" },
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Job Details with Eligibility",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/jobs/{{JOB_ID}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "jobs", "{{JOB_ID}}"]
+            }
+          }
+        },
+        {
+          "name": "Check Student Eligibility Endpoint",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/jobs/{{JOB_ID}}/eligibility",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "jobs", "{{JOB_ID}}", "eligibility"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

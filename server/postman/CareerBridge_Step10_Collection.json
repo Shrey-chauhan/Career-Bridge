@@ -1,0 +1,141 @@
+{
+  "info": {
+    "name": "CareerBridge API - Step 10 Placement Analytics & Intelligence",
+    "description": "Postman collection for Step 10 Placement Analytics endpoints, recruitment conversion funnel, time-series application trends, company/job/branch performance breakdowns, insights generation, CSV export, and RBAC security rules.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET Overview KPIs & Growth",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/overview?from=2026-01-01&to=2026-12-31",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "overview"],
+          "query": [
+            { "key": "from", "value": "2026-01-01" },
+            { "key": "to", "value": "2026-12-31" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET Recruitment Conversion Funnel",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/funnel",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "funnel"]
+        }
+      }
+    },
+    {
+      "name": "GET Application Volume Trends",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/trends",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "trends"]
+        }
+      }
+    },
+    {
+      "name": "GET Company Performance Table",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/companies",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "companies"]
+        }
+      }
+    },
+    {
+      "name": "GET Course & Branch Performance Table",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/branches",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "branches"]
+        }
+      }
+    },
+    {
+      "name": "GET Dynamic Insights & Bottlenecks",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/insights",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "insights"]
+        }
+      }
+    },
+    {
+      "name": "GET Export Companies CSV Report",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ADMIN_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/export/companies",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "export", "companies"]
+        }
+      }
+    },
+    {
+      "name": "RBAC Security Test - Student Attempt (Expect 403)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/admin/analytics/overview",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "admin", "analytics", "overview"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "info": {
+    "name": "CareerBridge API - Application Management & Workflow",
+    "description": "Postman Collection for Step 5: Application Management, Student Applications, Withdrawals, Company Candidate Review, Shortlisting & Rejection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Student Applications",
+      "item": [
+        {
+          "name": "Submit Job Application",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobId\": \"{{JOB_ID}}\",\n  \"coverLetter\": \"I am an enthusiastic Full Stack developer with React & Node experience, excited to apply for this role.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/applications",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications"]
+            }
+          }
+        },
+        {
+          "name": "Get My Applications (Student Feed)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/applications/my?page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "my"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Application Details (Student View)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/applications/{{APPLICATION_ID}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "{{APPLICATION_ID}}"]
+            }
+          }
+        },
+        {
+          "name": "Withdraw Application",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{STUDENT_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/applications/{{APPLICATION_ID}}/withdraw",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "{{APPLICATION_ID}}", "withdraw"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Company Applications Management",
+      "item": [
+        {
+          "name": "Get Company Applications (Filters & Search)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/applications/company?status=APPLIED&page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "company"],
+              "query": [
+                { "key": "status", "value": "APPLIED" },
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Candidate Application Details (Company View)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/applications/company/{{APPLICATION_ID}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "company", "{{APPLICATION_ID}}"]
+            }
+          }
+        },
+        {
+          "name": "Shortlist Candidate Application",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/applications/company/{{APPLICATION_ID}}/shortlist",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "company", "{{APPLICATION_ID}}", "shortlist"]
+            }
+          }
+        },
+        {
+          "name": "Reject Candidate Application with Reason",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Candidate skill profile does not align with senior full stack engineering requirements.\",\n  \"companyNotes\": \"Good candidate profile, but lacking required React experience.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/applications/company/{{APPLICATION_ID}}/reject",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "company", "{{APPLICATION_ID}}", "reject"]
+            }
+          }
+        },
+        {
+          "name": "Update Private Recruiter Notes",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{COMPANY_TOKEN}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyNotes\": \"Strong candidate. Keep resume on file for future frontend opportunities.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/applications/company/{{APPLICATION_ID}}/notes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "applications", "company", "{{APPLICATION_ID}}", "notes"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
